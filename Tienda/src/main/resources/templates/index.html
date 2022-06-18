@@ -4,6 +4,7 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{css/estilos.css}"/>
     </head>
     <body>
         <!-- comment 
@@ -17,24 +18,31 @@
          <p>telefono <span th:text="${cliente.telefono}">text</span></p>
          <br>
          <br>-->
-         <h1>Lista de clientes</h1>
+        <header th:replace="layout/plantilla :: header"></header>
+         <h2>Lista de clientes</h2>
+         <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
+         <br>
+         <br>
          <div th:if="${clientes != null and !clientes.empty}">
          <table border="1">
-            
-             <thead>
+             <thead id="encabezadoTabla">
                  <tr>
                      <th>Nombre</th>
                      <th>Apellidos</th>
                      <th>Correo</th>
                      <th>Teléfono</th>
+                     <th>Modificar</th>
+                     <th>Eliminar</th>
                  </tr>
              </thead>
              <tbody>
                  <tr th:each="item : ${clientes}">
-                     <td th:text="${item.nombre}"></td>
+                     <td th:class="${item.nombre == 'Jonathan'} ? nombreAzul : nombreRojo" th:text="${item.nombre}"></td>
                      <td th:text="${item.apellidos}"></td>
                      <td th:text="${item.correo}"></td>
                      <td th:text="${item.telefono}"></td>
+                     <td><a th:href="@{/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
+                     <td><a th:href="@{/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
                  </tr>
              </tbody>
          </table>
@@ -42,6 +50,7 @@
          <div th:if="${clientes == null or clientes.empty}">
              La lista de clientes esta vacia
          </div>
-
+         
+         <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>
