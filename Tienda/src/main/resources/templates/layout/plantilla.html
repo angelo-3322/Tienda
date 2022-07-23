@@ -1,17 +1,44 @@
 <!DOCTYPE html>
-
-<html xmlns:th="https://www.thymeleaft.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>TODO supply a title</title>
+        <title>TechShop</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <header th:fragment="header">
-            <h1 style="color: blue">TecShhop</h1>
+        <header th:fragment="header" class="header">
+            <nav class="nav">
+                <a th:href="@{/}" class="logo nav-link">TechShop</a>
+                <ul class="nav-menu" sec:authorize="hasRole('ROLE_VENDEDOR')">
+                    <li class="nav-menu-item">
+                        <a th:href="@{/cliente/listado}" class="nav-menu-link nav-link"
+                           th:text="#{plantilla.clientes}">Clientes</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a th:href="@{/categoria/listado}" class="nav-menu-link nav-link"
+                           th:text="#{plantilla.categorias}">Categorías</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a th:href="@{/articulo/listado}" class="nav-menu-link nav-link"
+                           th:text="#{plantilla.articulos}">Articulos</a>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a th:href="@{/articulo/listado}" class="nav-menu-link nav-link"
+                           sec:authorize="hasRole('ADMIN')">Admin</a>
+                    </li>
+                </ul>
+            </nav>
         </header>
-        <footer th:fragmen="footer">
-            <p>&COPY; Derechos reservados 2022</p>
+        <footer th:fragment="footer" class="footer">
+            <div>&COPY; [[#{plantilla.derechos}]]
+                <a th:href="@{/(lang=es)}">ES</a> | 
+                <a th:href="@{/(lang=en)}">EN</a>
+                User: <span sec:authentication="name">xx</span>
+                Roles: <span sec:authentication="principal.authorities">xx</span>
+                <form method="POST" th:action="@{/logout}" style="display:inline">
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                </form>
+            </div>
         </footer>
     </body>
 </html>
