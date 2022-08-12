@@ -10,7 +10,7 @@
                     <div class="col-md-3" sec:authorize="hasRole('ROLE_ADMIN')">   
                         <button 
                             type="button" 
-                            class="btn btn-primary btn-block" 
+                            class="btn btn-dark btn-block" 
                             data-bs-toggle="modal" 
                             data-bs-target="#agregarCliente">
                             <i class="fas fa-plus"></i> [[#{accion.agregar}]]
@@ -25,13 +25,13 @@
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card">
                                 <h4>[[#{categoria.titulo}]]</h4>
                             </div>
                             <div th:if="${categorias != null and !categorias.empty}">
                                 <table class="table table-stryped">
                                     <thead class="thead-dark">
-                                        <tr>
+                                        <tr class="table-info">
                                             <th>#</th>
                                             <th th:text="#{categoria.descripcion}">Descripción</th>
                                             <th th:text="#{categoria.activo}">Activa</th>
@@ -41,16 +41,16 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="categoria, contador : ${categorias}">
-                                            <td>[[${contador.count}]]</td>
-                                            <td>[[${categoria.descripcion}]]</td>
-                                            <td>[[${categoria.activo}]]</td>
-                                            <td>
+                                            <td class="table-success">[[${contador.count}]]</td>
+                                            <td class="table-success">[[${categoria.descripcion}]]</td>
+                                            <td class="table-success">[[${categoria.activo}]]</td>
+                                            <td class="table-danger">
                                                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/categoria/eliminar/}+${categoria.idCategoria}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td class="table-warning">
                                                 <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/categoria/modificar/}+${categoria.idCategoria}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.actualizar}]]
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-check-label" for="activo" th:text="#{categoria.activo}">Activo</label>
-                                    <input type="checkbox" class="form-check-input" name="activo" required="true">
+                                    <input type="checkbox" class="form-check-input" name="activo" >
                                 </div>
                             </div>
                             <div class="modal-footer">

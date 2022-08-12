@@ -5,6 +5,7 @@
 package com.Tienda.domain;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Articulo implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_articulo")
     private Long idArticulo;//hibernet lo transforma en id_credito
     private Long idCategoria;
     private String descripcion;
